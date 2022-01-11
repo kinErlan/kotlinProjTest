@@ -2,7 +2,8 @@ const val TAVERN_NAME = "Taernyl's Folly"
 fun main() {
 //    val orderName = "shandy,Dragon's Breath ,5.91"
     val orderName = "shandy,Shirley's Temple,5.91"
-    placeOrder(orderName)
+//    placeOrder(orderName)
+    "abcd".forEach { ll -> println("$ll") }
 }
 
 fun placeOrder(menuData: String) {
