@@ -1,9 +1,30 @@
+import kotlin.math.roundToInt
+
 const val TAVERN_NAME = "Taernyl's Folly"
+var playerGold = 10
+var playerSilver = 10
+
 fun main() {
-//    val orderName = "shandy,Dragon's Breath ,5.91"
-    val orderName = "shandy,Shirley's Temple,5.91"
-//    placeOrder(orderName)
-    "abcd".forEach { ll -> println("$ll") }
+    val orderName = "shandy,Dragon's Breath,5.91"
+    placeOrder(orderName)
+}
+
+fun performPurchase(price: Double){
+    displayBalance()
+    val totalPurse = playerGold + (playerSilver / 100.0)
+    println("Total purse: $totalPurse")
+    println("Purchasing item for $price")
+    val remainingBalance = totalPurse - price
+    println("remaining balance: ${"%.2f".format(remainingBalance)}")
+
+    val remainingGold = remainingBalance.toInt()
+    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
+    playerGold = remainingGold
+    playerSilver = remainingSilver
+    displayBalance()
+}
+fun displayBalance(){
+    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }
 
 fun placeOrder(menuData: String) {
@@ -17,6 +38,7 @@ fun placeOrder(menuData: String) {
 
 //    val phrase = "Ah, delicious $name"
 //    println("Madrigal exclaims: ${toDragonSpeak(phrase)}")
+    performPurchase(price.toDouble())
     val phrase = if(name == "Dragon's Breath") {
         "Madrigal exclaims: ${toDragonSpeak("Ah, delicious $name")}"
     } else {
