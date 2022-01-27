@@ -10,8 +10,8 @@ fun main() {
 }
 
 fun performPurchase(price: Double){
-    displayBalance()
-    val totalPurse = playerGold + (playerSilver / 100.0)
+    for10Chapter.displayBalance()
+    val totalPurse = for10Chapter.playerGold + (for10Chapter.playerSilver / 100.0)
     println("Total purse: $totalPurse")
     println("Purchasing item for $price")
     val remainingBalance = totalPurse - price
@@ -19,17 +19,17 @@ fun performPurchase(price: Double){
 
     val remainingGold = remainingBalance.toInt()
     val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-    playerGold = remainingGold
-    playerSilver = remainingSilver
-    displayBalance()
+    for10Chapter.playerGold = remainingGold
+    for10Chapter.playerSilver = remainingSilver
+    for10Chapter.displayBalance()
 }
 fun displayBalance(){
-    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+    println("Player's purse balance: Gold: ${for10Chapter.playerGold}, Silver: ${for10Chapter.playerSilver}")
 }
 
 fun placeOrder(menuData: String) {
-    val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
-    val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
+    val indexOfApostrophe = for10Chapter.TAVERN_NAME.indexOf('\'')
+    val tavernMaster = for10Chapter.TAVERN_NAME.substring(0 until indexOfApostrophe)
     println("Madrigal speaks with $tavernMaster about their order.")
 
     val (type, name, price) = menuData.split(',')
@@ -37,10 +37,10 @@ fun placeOrder(menuData: String) {
     println(message)
 
 //    val phrase = "Ah, delicious $name"
-//    println("Madrigal exclaims: ${toDragonSpeak(phrase)}")
-    performPurchase(price.toDouble())
+//    println("Madrigal exclaims: ${for10Chapter.toDragonSpeak(phrase)}")
+    for10Chapter.performPurchase(price.toDouble())
     val phrase = if(name == "Dragon's Breath") {
-        "Madrigal exclaims: ${toDragonSpeak("Ah, delicious $name")}"
+        "Madrigal exclaims: ${for10Chapter.toDragonSpeak("Ah, delicious $name")}"
     } else {
         "Madrigal says: Thanks for the $name"
     }
