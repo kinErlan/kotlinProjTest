@@ -1,3 +1,5 @@
+package com.bigherdranch.nyethack
+
 fun main(){
     runSimulation()
 }

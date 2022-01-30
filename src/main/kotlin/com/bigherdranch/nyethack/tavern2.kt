@@ -1,6 +1,9 @@
+package com.bigherdranch.nyethack
+
 import kotlin.math.roundToInt
 
-const val TAVERN_NAME = "Taernyl's Folly"
+const val TAVERN_NAME: String = "Taernyl's Folly"
+
 var playerGold = 10
 var playerSilver = 10
 
@@ -24,7 +27,7 @@ fun performPurchase(price: Double){
     displayBalance()
 }
 fun displayBalance(){
-    println("Player's purse balance: Gold: ${playerGold}, Silver: ${playerSilver}")
+    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }
 
 fun placeOrder(menuData: String) {
@@ -37,7 +40,7 @@ fun placeOrder(menuData: String) {
     println(message)
 
 //    val phrase = "Ah, delicious $name"
-//    println("Madrigal exclaims: ${toDragonSpeak(phrase)}")
+//    println("Madrigal exclaims: ${com.bigherdranch.nyethack.toDragonSpeak(phrase)}")
     performPurchase(price.toDouble())
     val phrase = if(name == "Dragon's Breath") {
         "Madrigal exclaims: ${toDragonSpeak("Ah, delicious $name")}"

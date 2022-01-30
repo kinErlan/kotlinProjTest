@@ -1,7 +1,6 @@
 package for10Chapter
 
 import java.io.File
-import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
@@ -16,8 +15,6 @@ val patronGold = mutableMapOf<String, Double>()
 
 fun main() {
     val orderName = "shandy,Dragon's Breath,5.91"
-//    placeOrder(orderName)
-
 
     println(patronList.first())
     println(patronList[1])
@@ -94,7 +91,7 @@ fun main() {
 }
 
 private fun displayPatronBalances() {
-    patronGold.forEach{patron, balance ->
+    patronGold.forEach{ patron, balance ->
         println("$patron, balance: ${"%.2f".format(balance)}")
     }
 }
@@ -114,7 +111,7 @@ fun placeOrder(patronName: String, menuData: String) {
     println(message)
 
 //    val phrase = "Ah, delicious $name"
-//    println("Madrigal exclaims: ${for10Chapter.toDragonSpeak(phrase)}")
+//    println("Madrigal exclaims: ${com.bigherdranch.nyethack.toDragonSpeaknch.nyethack.toDragonSpeak(phrase)}")
     performPurchase(price.toDouble(), patronName)
     val phrase = if (name == "Dragon's Breath") {
         "$patronName exclaims: ${toDragonSpeak("Ah, delicious $name")}"

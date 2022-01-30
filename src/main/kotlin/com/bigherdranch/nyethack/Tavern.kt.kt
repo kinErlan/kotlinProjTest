@@ -1,4 +1,4 @@
-import java.util.*
+package com.bigherdranch.nyethack
 
 fun main(args: Array<String>) {
 

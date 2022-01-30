@@ -1,3 +1,5 @@
+package com.bigherdranch.nyethack
+
 import kotlin.math.roundToInt
 
 fun main(){

@@ -1,3 +1,5 @@
+package com.bigherdranch.nyethack
+
 fun main() {
     // 1 способ
     // оператор безапасного вызова ?.
