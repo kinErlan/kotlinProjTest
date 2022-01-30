@@ -2,9 +2,7 @@ package com.bigherdranch.nyethack/*
 * chapter 3
 * */
 fun main(args: Array<String>) {
-
-
-    val player: Player = Player()
+    val player: Player = Player("madrigal",true,true,)
 
     val auraColor = player.auraColor(player.isBlessed)
 
@@ -30,6 +28,6 @@ private fun printPlayerStatus(player: Player) {
 
 
 
-fun shoukdReturnAString(): String{
+fun shouldReturnAString(): String{
     TODO("TEST")
 }

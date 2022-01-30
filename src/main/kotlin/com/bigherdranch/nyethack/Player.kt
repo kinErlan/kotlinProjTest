@@ -1,17 +1,44 @@
 package com.bigherdranch.nyethack
 
+import java.io.File
 import java.util.*
 
-class Player {
-    var name = "madrigal"
-        get() = field.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+// переменные класса можно объявлять в конструкторе
+// без создания самих переменных в объекте
+
+class Player(
+    _name: String,
+    val isBlessed: Boolean,
+    private val isImmortal: Boolean,
+    var healthPoints: Int = 100,
+) {
+    private val hometown: String = selectHometown()
+
+    private fun selectHometown() = File("data/towns.txt")
+        .readText()
+        .split("\n")
+        .shuffled()
+        .first()
+        .trim()
+
+    var name = _name
+        get() {return "${field.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} of $hometown"}
         set(value) {
             field = value.trim()
         }
 
-    var healthPoints: Int = 88
-    val isBlessed = true
-    private val isImmortal = false
+    init {
+        require(healthPoints > 0, { "healthPoints must be a greater than zero" })
+        require(name.isNotBlank(), { "Player must have a name" })
+    }
+
+    constructor(name: String) : this(
+        name,
+        isBlessed = true,
+        isImmortal = false,
+    ) {
+        if (name.lowercase() == "kar") healthPoints = 40
+    }
 
     fun castFireball(numFireballs: Int = 2) = println(
         "a glass of Fireball springs into existence. (x$numFireballs)"
@@ -24,7 +51,7 @@ class Player {
 
     fun fomatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
         when (healthPoints) {
-            100 -> " is in excellent condition!"
+            100 -> "is in excellent condition!"
             in 90..99 -> " has a few scratches"
             in 75..89 -> if (isBlessed) {
                 " has some minor wounds but is healing quite quickly"
@@ -36,5 +63,4 @@ class Player {
                 " is in awful condition."
             }
         }
-
 }
