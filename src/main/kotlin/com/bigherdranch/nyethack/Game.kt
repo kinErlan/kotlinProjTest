@@ -1,7 +1,16 @@
-package com.bigherdranch.nyethack/*
+package com.bigherdranch.nyethack
+
+import kotlin.system.exitProcess
+
+/*
 * chapter 3
 * */
 fun main(args: Array<String>) {
+    var currentRoom: Room = TownSquare()
+    println(currentRoom.description())
+    println(currentRoom.load())
+    exitProcess(0)
+
     val player: Player = Player("madrigal",true,true,)
 
     val auraColor = player.auraColor(player.isBlessed)
