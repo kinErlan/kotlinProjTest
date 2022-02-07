@@ -12,7 +12,8 @@ class Player(
     private val isImmortal: Boolean,
     var healthPoints: Int = 100,
 ) {
-    private val hometown: String = selectHometown()
+    private val hometown by lazy({ selectHometown() })
+    var currentPosition = Coordinate(0,0)
 
     private fun selectHometown() = File("data/towns.txt")
         .readText()
@@ -49,7 +50,7 @@ class Player(
         return if (auraVisible) "GREEN" else "NONE"
     }
 
-    fun fomatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
+    fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
         when (healthPoints) {
             100 -> "is in excellent condition!"
             in 90..99 -> " has a few scratches"
