@@ -62,6 +62,29 @@ object Game {
         "Invalid direction: $directionInput."
     }
 
+    private fun fight() = currentRoom.monster?.let {
+        while (player.healthPoints > 0 && it.healthPoints > 0) {
+            slay(it)
+            Thread.sleep(1000)
+        }
+        "Combat complete."
+    } ?: "There's nothing here to fight."
+
+    private fun slay(monster: Monster) {
+        println("${monster.name} did ${monster.attack(player)} damage!")
+        println("${player.name} did ${player.attack(monster)} damage!")
+        if (player.healthPoints <= 0) {
+            println(">>>> You have been defeated! Thanks for playing. <<<<")
+            exitProcess(0)
+        }
+        if (monster.healthPoints <= 0) {
+            println(">>>> ${monster.name} has been defeated! <<<<")
+            currentRoom.monster = null
+        }
+
+
+    }
+
     private fun printPlayerStatus(player: Player) {
         println("(Aura: ${player.auraColor(player.isBlessed)} Blessed: ${if (player.isBlessed) "YES" else "NO"})")
         println("${player.name} ${player.formatHealthStatus(player.healthPoints, player.isBlessed)}")
@@ -74,6 +97,7 @@ object Game {
 
         fun processCommand() = when (command.lowercase(Locale.getDefault())) {
             "move" -> move(argument)
+            "fight" -> fight()
             "exit" -> exitProcess(0)
             else -> commandNotFound()
         }

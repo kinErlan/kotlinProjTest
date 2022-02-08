@@ -8,12 +8,12 @@ import java.util.*
 
 class Player(
     _name: String,
+    override var healthPoints: Int = 100,
     val isBlessed: Boolean,
-    private val isImmortal: Boolean,
-    var healthPoints: Int = 100,
-) {
+    private var isImmortal: Boolean,
+) : Fightable {
     private val hometown by lazy({ selectHometown() })
-    var currentPosition = Coordinate(0,0)
+    var currentPosition = Coordinate(0, 0)
 
     private fun selectHometown() = File("data/towns.txt")
         .readText()
@@ -23,7 +23,9 @@ class Player(
         .trim()
 
     var name = _name
-        get() {return "${field.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} of $hometown"}
+        get() {
+            return "${field.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} of $hometown"
+        }
         set(value) {
             field = value.trim()
         }
@@ -64,4 +66,16 @@ class Player(
                 " is in awful condition."
             }
         }
+
+    override val diceCount: Int = 3
+    override val diceSides: Int = 6
+    override fun attack(opponent: Fightable): Int {
+        val damageDealt = if(isBlessed) {
+            damageRoll * 2
+        } else {
+            damageRoll
+        }
+        opponent.healthPoints -= damageDealt
+        return damageDealt
+    }
 }
